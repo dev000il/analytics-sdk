@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="AllTest" preserve-order="true" thread-count="100" parallel="tests">
+
+    <test name="LargeActivityTest" parallel="test" enabled="false">
+        <classes>
+            <class name="so.sao.analytics.sdk.exclude.LargeActivitiesData"/>
+        </classes>
+    </test>
+
+    <test name="DateUtilTest">
+        <classes>
+            <class name="so.sao.analytics.sdk.util.DateUtilTest"/>
+        </classes>
+    </test>
+
+    <test name="MapDBTest" enabled="false">
+        <packages>
+            <package name="so.sao.analytics.sdk.mapdb"/>
+        </packages>
+    </test>
+</suite>

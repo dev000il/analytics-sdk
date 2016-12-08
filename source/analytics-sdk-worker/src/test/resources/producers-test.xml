@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="ProducersTest" parallel="methods" thread-count="20">
+
+    <test name="ActivityTest" thread-count="5">
+        <classes>
+            <class name="so.sao.analytics.sdk.worker.producers.ActivityProducerTest">
+                <methods>
+                    <exclude name="testSendActivity"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="TransactionTest" thread-count="5">
+        <classes>
+            <class name="so.sao.analytics.sdk.worker.producers.TransactionProducerTest">
+                <methods>
+                    <exclude name="testSendTransaction"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="AppSystemTest" thread-count="5">
+        <classes>
+            <class name="so.sao.analytics.sdk.producers.AppSystemProducerTest"/>
+        </classes>
+    </test>
+
+    <test name="MgmtActionTest" thread-count="5">
+        <classes>
+            <class name="so.sao.analytics.sdk.producers.MgmtActionProducerTest">
+                <methods>
+                    <exclude name="testConcurrence"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="OpenAPILogTest" thread-count="5">
+        <classes>
+            <class name="so.sao.analytics.sdk.producers.OpenAPILogProducerTest">
+                <methods>
+                    <exclude name="testConcurrence"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    
+    <test name="ThirdpartyTest" thread-count="5">
+        <classes>
+            <class name="so.sao.analytics.sdk.producers.ThirdpartyProducerTest">
+            </class>
+        </classes>
+    </test>
+
+    <test name="UserInfoTest" thread-count="5">
+        <classes>
+            <class name="so.sao.analytics.sdk.worker.producers.UserBasicInfoProducerTest">
+            </class>
+        </classes>
+    </test>
+
+    <test name="InvalidMsgTest" thread-count="5">
+        <classes>
+            <class name="so.sao.analytics.sdk.worker.producers.InvalidMsgProducerTest">
+            </class>
+        </classes>
+    </test>
+</suite>

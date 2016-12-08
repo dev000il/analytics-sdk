@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="IntegrationTest" parallel="methods" thread-count="20">
+
+    <test name="IntegrationProducerTest" thread-count="5" enabled="false">
+        <classes>
+            <class name="so.sao.analytics.sdk.producers.IntegrationProducerTest"/>
+        </classes>
+    </test>
+
+</suite>

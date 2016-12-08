@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="analytics-sdk-worker-testng">
+
+    <!--
+        1: Kafka
+        2: AWS Kinesis KCL
+        3: AWS Kinesis KPL
+     -->
+    <parameter name="env" value="1"/>
+
+    <suite-files>
+        <suite-file path="producers-test.xml"/>
+        <suite-file path="integration-test.xml"/>
+    </suite-files>
+
+</suite>

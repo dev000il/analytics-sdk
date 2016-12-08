@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<parent>
+		<groupId>so.sao</groupId>
+		<artifactId>analytics-sdk</artifactId>
+		<version>1.4.3-SNAPSHOT</version>
+	</parent>
+	
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>so.sao</groupId>
+	<artifactId>analytics-sdk-common</artifactId>
+	<packaging>jar</packaging>
+	
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<kafka.conf.file.name>kafka-config</kafka.conf.file.name>
+				<platform.conf.file.name>platform-config</platform.conf.file.name>
+				<aws.platform.conf.file.name>aws-platform-config</aws.platform.conf.file.name>
+			</properties>
+		</profile>
+		<profile>
+			<id>test</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<properties>
+				<kafka.conf.file.name>kafka-config.test</kafka.conf.file.name>
+				<platform.conf.file.name>platform-config.test</platform.conf.file.name>
+				<aws.platform.conf.file.name>aws-platform-config.test</aws.platform.conf.file.name>
+			</properties>
+		</profile>
+		<profile>
+			<id>stable</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<properties>
+				<kafka.conf.file.name>kafka-config.stable</kafka.conf.file.name>
+				<platform.conf.file.name>platform-config.stable</platform.conf.file.name>
+				<aws.platform.conf.file.name>aws-platform-config.stable</aws.platform.conf.file.name>
+			</properties>
+		</profile>
+		<profile>
+			<id>prod</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<properties>
+				<kafka.conf.file.name>kafka-config.prod</kafka.conf.file.name>
+				<platform.conf.file.name>platform-config.prod</platform.conf.file.name>
+				<aws.platform.conf.file.name>aws-platform-config.prod</aws.platform.conf.file.name>
+			</properties>
+		</profile>
+	</profiles>
+	
+	<properties>
+		<kafka.conf.file.name>kafka-config</kafka.conf.file.name>
+	</properties>
+		
+	<dependencies>
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.esotericsoftware</groupId>
+			<artifactId>kryo</artifactId>
+		</dependency>
+		
+			<dependency>
+				<groupId>com.amazonaws</groupId>
+				<artifactId>aws-java-sdk</artifactId>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<tasks>
+								<delete file="${project.build.outputDirectory}/kafka-config.properties" />
+								<copy file="src/main/resources/${kafka.conf.file.name}.properties" tofile="${project.build.outputDirectory}/kafka-config.properties" />
+								<delete file="${project.build.outputDirectory}/kafka-config.test.properties" />
+								<delete file="${project.build.outputDirectory}/kafka-config.integration.properties" />
+								<delete file="${project.build.outputDirectory}/kafka-config.stable.properties" />
+								<delete file="${project.build.outputDirectory}/kafka-config.prod.properties" />
+
+								<delete file="${project.build.outputDirectory}/aws-platform-config.properties" />
+								<copy file="src/main/resources/${aws.platform.conf.file.name}.properties" tofile="${project.build.outputDirectory}/aws-platform-config.properties" />
+								<delete file="${project.build.outputDirectory}/aws-platform-config.test.properties" />
+								<delete file="${project.build.outputDirectory}/aws-platform-config.stable.properties" />
+								<delete file="${project.build.outputDirectory}/aws-platform-config.prod.properties" />
+
+								<delete file="${project.build.outputDirectory}/platform-config.properties" />
+								<copy file="src/main/resources/${platform.conf.file.name}.properties" tofile="${project.build.outputDirectory}/platform-config.properties" />
+								<delete file="${project.build.outputDirectory}/platform-config.test.properties" />
+								<delete file="${project.build.outputDirectory}/platform-config.integration.properties" />
+								<delete file="${project.build.outputDirectory}/platform-config.stable.properties" />
+								<delete file="${project.build.outputDirectory}/platform-config.prod.properties" />
+							</tasks>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<suiteXmlFiles>
+						<suiteXmlFile>${project.build.testOutputDirectory}/sdk-common-alltest.xml</suiteXmlFile>
+					</suiteXmlFiles>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

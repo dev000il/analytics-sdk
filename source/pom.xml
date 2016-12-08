@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+      <groupId>so.sao</groupId>
+      <artifactId>analytics-sdk-parent</artifactId>
+      <version>1.4.3-SNAPSHOT</version>
+      <relativePath>analytics-sdk-parent/</relativePath>
+    </parent>
+
+    <artifactId>analytics-sdk</artifactId>
+    <packaging>pom</packaging>
+    
+    <name>analytics-sdk</name>
+    <description>
+        Create an analytics SDK common.
+    </description>
+    <url>https://www.sao.so</url>
+
+    <modules>
+		<module>analytics-sdk-parent</module>
+        <module>analytics-sdk-common</module>
+        <module>analytics-sdk-worker</module>
+        <module>analytics-sdk-storm-common</module>
+        <module>analytics-sdk-storm-local</module>
+        <module>analytics-sdk-kinesis-common</module>
+    </modules>
+
+    <developers>
+        <developer>
+            <id>0</id>
+            <email>senhui.li@sao.so</email>
+        </developer>
+    </developers>
+
+</project>
